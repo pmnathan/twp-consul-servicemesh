@@ -4,6 +4,9 @@
     "tags": [
       "v1"
     ],
+    "meta": {
+      "version": "1"
+    },
     "port": 5001,
     "connect": { "sidecar_service": {} },
     "check": {

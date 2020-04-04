@@ -19,3 +19,6 @@ connect {
 
 retry_join = ["172.20.20.10"]
 
+enable_central_service_config = true
+
+
