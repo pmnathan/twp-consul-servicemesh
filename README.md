@@ -14,11 +14,11 @@ This will start up 4 virtual machines. You can use `vagrant status` to list the 
 1. consul
 2. web
 3. apiv1 (api version 1)
-4. apiv1 (api version 2)
+4. apiv2 (api version 2)
 
 The `Vagrantfile` has more information on how each of the boxes are set up. 
 
-The home folder where configuration and logs are stored can be found at `/vagrant` folder. This is the same for all the VMs. The configuration is copied directly from the respective folders in the git repository. i.e the data under the web folder in the git repository is copied to `/vagrant`
+The home folder where configuration and logs are stored can be found at `/vagrant` folder. This is the same for all the VMs. The configuration is copied directly from the respective folders in the git repository. for e.g the data under the `web` folder in the git repository is copied to `/vagrant` folder in the `web VM`.
 
 ### Consul UI
 The consul UI can be reached at [http://localhost:8080](http://localhost:8080)
