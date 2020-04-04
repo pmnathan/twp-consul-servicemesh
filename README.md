@@ -52,7 +52,7 @@ this is because the local bind port is set to 9191 in `web_service.json` file
 ```
   
 ### Enable Layer 7 Traffic Routing
-Layer 7 Configuration files are stored in the Consul VM under the  `l7config' folder. the Following commands can be used to enable L7 traffic routing...
+Layer 7 Configuration files are stored in the Consul VM under the  `l7config` folder. The following commands can be used to enable L7 traffic routing...
 
 Enter the consul VM
 ```
