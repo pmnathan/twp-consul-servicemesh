@@ -77,7 +77,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "consul" do |consul|
       consul.vm.hostname = "consul"
       consul.vm.synced_folder "consul", "/vagrant"
-      consul.vm.provision "shell", path: "startconsul.sh"
+      consul.vm.provision "shell", path: "start_consul.sh"
       consul.vm.network "private_network", ip: "172.20.20.10"
       consul.vm.network "forwarded_port", guest: 8500, host: 8080
   end
@@ -85,11 +85,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "apiv1" do |apiv1|
       apiv1.vm.hostname = "apiv1"
       apiv1.vm.synced_folder "apiv1", "/vagrant"
-      apiv1.vm.provision "shell", path: "startconsul.sh"
-      apiv1.vm.provision "shell", path: "startapi.sh"
-      apiv1.vm.provision "shell", path: "startenvoyproxy.sh"
+      apiv1.vm.provision "shell", path: "start_consul.sh"
+      apiv1.vm.provision "shell", path: "start_flask_service.sh"
+      apiv1.vm.provision "shell", path: "start_envoy_proxy_api.sh"
       apiv1.vm.network "private_network", ip: "172.20.20.15"
-      apiv1.vm.network "forwarded_port", guest: 19000, host: 19015
+      #apiv1.vm.network "forwarded_port", guest: 19000, host: 19015
       apiv1.vm.post_up_message = "apiv1 endpoint: http://172.20.20.15:5001"
       #apiv1.vm.post_up_message = "envoy UI: http://localhost:19015"
   end
@@ -97,11 +97,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "apiv2" do |apiv2|
       apiv2.vm.hostname = "apiv2"
       apiv2.vm.synced_folder "apiv2", "/vagrant"
-      apiv2.vm.provision "shell", path: "startconsul.sh"
-      apiv2.vm.provision "shell", path: "startapi.sh"
-      apiv2.vm.provision "shell", path: "startenvoyproxy.sh"
+      apiv2.vm.provision "shell", path: "start_consul.sh"
+      apiv2.vm.provision "shell", path: "start_flask_service.sh"
+      apiv2.vm.provision "shell", path: "start_envoy_proxy_api.sh"
       apiv2.vm.network "private_network", ip: "172.20.20.16"
-      apiv2.vm.network "forwarded_port", guest: 19000, host: 19016
+      #apiv2.vm.network "forwarded_port", guest: 19000, host: 19016
       apiv2.vm.post_up_message = "apiv2 endpoint: http://172.20.20.16:5001"
       #apiv2.vm.post_up_message = "envoy UI: http://localhost:19016"
   end
@@ -109,11 +109,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "web" do |web|
     web.vm.hostname = "web"
     web.vm.synced_folder "web", "/vagrant"
-    web.vm.provision "shell", path: "startconsul.sh"
-    web.vm.provision "shell", path: "startapi.sh"
-    web.vm.provision "shell", path: "startenvoyproxy.sh"
+    web.vm.provision "shell", path: "start_consul.sh"
+    web.vm.provision "shell", path: "start_flask_service.sh"
+    web.vm.provision "shell", path: "start_envoy_proxy_web.sh"
     web.vm.network "private_network", ip: "172.20.20.11"
-    web.vm.network "forwarded_port", guest: 19000, host: 19016
+    #web.vm.network "forwarded_port", guest: 19000, host: 19016
     web.vm.post_up_message = "apiv2 endpoint: http://172.20.20.11:5001"
     #apiv2.vm.post_up_message = "envoy UI: http://localhost:19016"
 end
