@@ -1,0 +1,14 @@
+[Unit]
+Description="HashiCorp Consul - A service mesh solution"
+Documentation=https://www.consul.io/
+After=network-online.target
+
+[Service]
+User=vagrant
+Group=vagrant
+ExecStart=/usr/bin/consul agent -enable-local-script-checks -config-dir=/vagrant/consulconfig/
+ExecReload=/usr/bin/consul reload
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
