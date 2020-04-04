@@ -1,0 +1,17 @@
+{
+    "service": {
+      "name": "web",
+      "tags": [
+        "main"
+      ],
+      "port": 5001,
+      "connect": { "sidecar_service": {} },
+      "check": {
+        "id": "web",
+        "name": "API HTTP on port 5001",
+        "tcp": "localhost:5001",
+        "interval": "10s",
+        "timeout": "1s"
+      }
+    }
+  } 

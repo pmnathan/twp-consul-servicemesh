@@ -1,10 +1,21 @@
 datacenter          = "consuldemo"
 server              = false
 data_dir            = "/etc/consul.d"
-advertise_addr      = "172.20.20.15"
+advertise_addr      = "172.20.20.16"
 client_addr         = "0.0.0.0"
 log_level           = "INFO"
 ui                  = false
+leave_on_terminate  = false
+skip_leave_on_interrupt = true
+rejoin_after_leave  =  true
+
+ports {
+  grpc = 8502
+}
+
+connect {
+  enabled = true
+}
 
 retry_join = ["172.20.20.10"]
 

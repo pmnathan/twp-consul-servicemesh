@@ -32,7 +32,7 @@ $(lsb_release -cs) \
 stable"
 
 echo "for Envoy: Install Envoy binary."
-sudo apt-get install -y getenvoy-envoy
+sudo apt-get update && sudo apt-get install -y getenvoy-envoy
 
 
 
@@ -82,19 +82,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       consul.vm.network "forwarded_port", guest: 8500, host: 8080
   end
 
-  config.vm.define "frontend" do |frontend|
-    frontend.vm.hostname = "frontend"
-    frontend.vm.synced_folder "frontend", "/vagrant"
-    frontend.vm.provision "shell", path: "startconsul.sh"
-    frontend.vm.provision "shell", path: "startapi.sh"
-    frontend.vm.provision "shell", path: "startenvoyproxy.sh"
-    frontend.vm.network "private_network", ip: "172.20.20.11"
-    frontend.vm.network "forwarded_port", guest: 19000, host: 19001
-    frontend.vm.post_up_message = "Frontend UI: http://172.20.20.11:19001"
-    #frontend.vm.post_up_message = "envoy UI: http://localhost:19001"
-  end
-
-
   config.vm.define "apiv1" do |apiv1|
       apiv1.vm.hostname = "apiv1"
       apiv1.vm.synced_folder "apiv1", "/vagrant"
@@ -103,9 +90,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       apiv1.vm.provision "shell", path: "startenvoyproxy.sh"
       apiv1.vm.network "private_network", ip: "172.20.20.15"
       apiv1.vm.network "forwarded_port", guest: 19000, host: 19015
-      apiv1.vm.post_up_message = "apiv1 UI: http://172.20.20.15:19001"
+      apiv1.vm.post_up_message = "apiv1 endpoint: http://172.20.20.15:5001"
       #apiv1.vm.post_up_message = "envoy UI: http://localhost:19015"
-
   end
 
   config.vm.define "apiv2" do |apiv2|
@@ -116,9 +102,21 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       apiv2.vm.provision "shell", path: "startenvoyproxy.sh"
       apiv2.vm.network "private_network", ip: "172.20.20.16"
       apiv2.vm.network "forwarded_port", guest: 19000, host: 19016
-      apiv2.vm.post_up_message = "apiv2 UI: http://172.20.20.16:19001"
+      apiv2.vm.post_up_message = "apiv2 endpoint: http://172.20.20.16:5001"
       #apiv2.vm.post_up_message = "envoy UI: http://localhost:19016"
-
   end
 
+  config.vm.define "web" do |web|
+    web.vm.hostname = "web"
+    web.vm.synced_folder "web", "/vagrant"
+    web.vm.provision "shell", path: "startconsul.sh"
+    web.vm.provision "shell", path: "startapi.sh"
+    web.vm.provision "shell", path: "startenvoyproxy.sh"
+    web.vm.network "private_network", ip: "172.20.20.11"
+    web.vm.network "forwarded_port", guest: 19000, host: 19016
+    web.vm.post_up_message = "apiv2 endpoint: http://172.20.20.11:5001"
+    #apiv2.vm.post_up_message = "envoy UI: http://localhost:19016"
+end
+
+  
 end
