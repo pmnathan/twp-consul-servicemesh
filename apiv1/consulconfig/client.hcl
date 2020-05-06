@@ -21,4 +21,8 @@ retry_join = ["172.20.20.10"]
 
 enable_central_service_config = true
 
-
+#acl = {
+#  enabled = true
+#  default_policy = "allow"
+#  enable_token_persistence = true
+#}

@@ -62,8 +62,8 @@ vagrant ssh consul
 Write the configuration files
 ```
 consul config write /vagrant/l7config/api_service_defaults.json
-consul config write /vagrant/l7config/api_service_resolver.hcl
-consul config write /vagrant/l7config/api_service_router.hcl
+consul config write /vagrant/l7config/demo1/api_service_resolver.hcl
+consul config write /vagrant/l7config/demo1/api_service_router.hcl
 ```
 
 ### Test Layer 7 Traffic routing
